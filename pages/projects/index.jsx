@@ -17,7 +17,11 @@ function AllProjects({ projects, user }) {
           {projects &&
             projects.map((prj) => (
               // eslint-disable-next-line no-underscore-dangle
-              <Box __css={styles} onClick={() => router.push(`projects/one/${prj._id}`)}>
+              <Box
+                __css={styles}
+                onClick={() => router.push(`projects/one/${prj._id}`)}
+                key={prj._id}
+              >
                 <Text>{prj.name}</Text>
                 {prj.image && (
                   <Image

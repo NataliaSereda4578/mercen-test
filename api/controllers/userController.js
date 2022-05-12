@@ -20,12 +20,12 @@ const newUser = (req, res) => {
       res.status(500).send('Somthing goes wrong');
     } else {
       user.password = hash;
-      const newUser = new Users(user);
+      const createUser = new Users(user);
 
-      newUser
+      createUser
         .save()
         .then((result) => {
-          let token = generateToken({ email: result.email, _id: result._id });
+          const token = generateToken({ email: result.email, _id: result._id });
           res.cookie('token', token, {
             secure: false,
             maxAge: 900000,
@@ -35,7 +35,6 @@ const newUser = (req, res) => {
         })
         .catch((err) => {
           res.send(err._message);
-          return;
         });
     }
   });
@@ -48,7 +47,7 @@ const userLogin = (req, res) => {
     .then((result) => {
       bcrypt.compare(password, result.password, (err, checked) => {
         if (checked) {
-          let token = generateToken({ email: result.email, _id: result._id });
+          const token = generateToken({ email: result.email, _id: result._id });
 
           res.cookie('token', token, {
             secure: false,
