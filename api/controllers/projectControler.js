@@ -2,8 +2,7 @@ const Projects = require('../shemas/projectSchema');
 
 const getAllProjects = async (req, res) => {
   try {
-    // eslint-disable-next-line no-underscore-dangle
-    const result = await Projects.find({ userId: req.user?._id});
+    const result = await Projects.find({ userId: req.user?._id });
     res.send(result);
   } catch (e) {
     res.status(500);

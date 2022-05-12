@@ -1,6 +1,4 @@
-import {
-  Box, HStack, Text, useStyleConfig, VStack,
-} from '@chakra-ui/react';
+import { Box, HStack, Text, useStyleConfig, VStack } from '@chakra-ui/react';
 import Link from 'next/link';
 import { logout } from '../../api/requests/userRequests';
 import { sidebarOptions } from './constants';
@@ -17,8 +15,8 @@ export function Sidebar({ user }) {
       <Box>
         <Text variant="big-bold">Projects project ;)</Text>
       </Box>
-      {sidebarOptions
-        && sidebarOptions
+      {sidebarOptions &&
+        sidebarOptions
           .filter((e) => e.logged && user)
           .map((option) => (
             <Link href={option.path} key={option.lable}>
@@ -34,9 +32,7 @@ export function Sidebar({ user }) {
           variant="link"
           onClick={handleLogOut}
         >
-          {user.email}
-          {' '}
-          | LogOut
+          {user.email} | LogOut
         </Text>
       )}
     </VStack>

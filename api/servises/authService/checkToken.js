@@ -12,7 +12,6 @@ const checkToken = (req, res, next) => {
       res.status(401).send(err.message);
     }
     if (decoded) {
-      // eslint-disable-next-line no-underscore-dangle
       Users.findOne({ _id: decoded.data._id })
         .then((result) => {
           req.user = result;

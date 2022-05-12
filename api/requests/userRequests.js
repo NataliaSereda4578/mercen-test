@@ -2,15 +2,18 @@ import Router from 'next/router';
 
 export const login = async ({ email, password }) => {
   // eslint-disable-next-line no-undef
-  const responce = await fetch(`${process.env.NEXT_PUBLIC_ORIGIN}api/user/login`, {
-    method: 'POST',
-    headers: {
-      'content-type': 'application/json',
-    },
-    body: JSON.stringify({ email, password }),
-  });
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_ORIGIN}api/user/login`,
+    {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    }
+  );
 
-  if (!responce.ok) {
+  if (!response.ok) {
     throw new Error('Failed to login!');
   }
   Router.push('/');
@@ -18,19 +21,22 @@ export const login = async ({ email, password }) => {
 
 export const register = async ({ email, password, fullname }) => {
   // eslint-disable-next-line no-undef
-  const responce = await fetch(`${process.env.NEXT_PUBLIC_ORIGIN}api/user/register`, {
-    method: 'POST',
-    headers: {
-      'content-type': 'application/json',
-    },
-    body: JSON.stringify({
-      email,
-      password,
-      fullname,
-    }),
-  });
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_ORIGIN}api/user/register`,
+    {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        email,
+        password,
+        fullname,
+      }),
+    }
+  );
 
-  if (!responce.ok) {
+  if (!response.ok) {
     throw new Error('Registration failed!');
   }
 
@@ -42,18 +48,18 @@ export const getUserInfo = async (token) => {
   if (!token) {
     throw new Error('No token!');
   }
-  const responce = await fetch(
+  const response = await fetch(
     `${process.env.NEXT_PUBLIC_ORIGIN}api/user/me?${new URLSearchParams({
       token,
     })}`
   );
 
-  if (!responce.ok) {
+  if (!response.ok) {
     removeCookies('token');
     throw new Error('Cant load user info!');
   }
 
-  const userData = await responce.json();
+  const userData = await response.json();
   return userData;
 };
 
